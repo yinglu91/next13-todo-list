@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import prisma from '@/lib/prisma-db';
+import db from '@/lib/prisma-db';
 import { revalidatePath } from 'next/cache'
 
 async function createTodo(data: FormData) {
@@ -11,7 +11,7 @@ async function createTodo(data: FormData) {
     throw new Error('Invalid Title');
   }
 
-  await prisma.todo.create({ data: { title, complete: false } });
+  await db.todo.create({ data: { title, complete: false } });
 
   revalidatePath("/")  // marks that / path needs to be revalidated
 

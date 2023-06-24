@@ -1,15 +1,15 @@
 import { TodoItem } from "@/components/TodoItem"
-import prisma from "@/lib/prisma-db"
+import db from "@/lib/prisma-db"
 import Link from "next/link"
 
 function getTodos() {
-  return prisma.todo.findMany()
+  return db.todo.findMany()
 }
 
 async function toggleTodo(id: string, complete: boolean) {
   "use server"
 
-  await prisma.todo.update({ where: { id }, data: { complete } })
+  await db.todo.update({ where: { id }, data: { complete } })
 }
 
 export default async function Home() {
